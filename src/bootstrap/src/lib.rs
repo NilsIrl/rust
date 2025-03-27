@@ -399,10 +399,6 @@ impl Build {
             )
         }
 
-        if rust_info.is_from_tarball() && config.description.is_none() {
-            config.description = Some("built from a source tarball".to_owned());
-        }
-
         let mut build = Build {
             initial_lld,
             initial_relative_libdir,
