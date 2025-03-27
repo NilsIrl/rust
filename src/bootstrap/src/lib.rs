@@ -332,7 +332,7 @@ impl Build {
     /// line and the filesystem `config`.
     ///
     /// By default all build output will be placed in the current directory.
-    pub fn new(mut config: Config) -> Build {
+    pub fn new(config: Config) -> Build {
         let src = config.src.clone();
         let out = config.out.clone();
 
@@ -353,7 +353,7 @@ impl Build {
         #[cfg(not(unix))]
         let is_sudo = false;
 
-        let rust_info = config.rust_info.clone();
+        let _rust_info = config.rust_info.clone();
         let cargo_info = config.cargo_info.clone();
         let rust_analyzer_info = config.rust_analyzer_info.clone();
         let clippy_info = config.clippy_info.clone();
@@ -397,10 +397,6 @@ impl Build {
                 "`rustc` not found in {}, run `cargo build --bins` before `cargo run`",
                 bootstrap_out.display()
             )
-        }
-
-        if rust_info.is_from_tarball() && config.description.is_none() {
-            config.description = Some("built from a source tarball".to_owned());
         }
 
         let mut build = Build {
